@@ -30,6 +30,7 @@ export function Register() {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
@@ -37,6 +38,7 @@ export function Register() {
 
   const handleRegisterForm = (data) => {
     console.log({ data });
+    reset();
   };
 
   console.log({ errors });
