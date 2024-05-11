@@ -34,6 +34,7 @@ export function Register() {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
@@ -43,12 +44,18 @@ export function Register() {
     useCreateUserWithEmailAndPassword(auth);
 
   const handleRegisterForm = async (data) => {
-    console.log({ data });
-    await createUserWithEmailAndPassword(data.email, data.password);
-    toast.success("Successfully Register!");
-  };
+    const result = await createUserWithEmailAndPassword(
+      data.email,
+      data.password
+    );
 
-  console.log({ errors, user, error });
+    if (result?.user?.email) {
+      toast.success("Successfully Register!");
+    } else {
+      toast.error(error.code);
+    }
+    reset();
+  };
 
   return (
     <div className="w-full h-screen flex justify-center items-center">
