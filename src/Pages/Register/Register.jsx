@@ -40,6 +40,7 @@ export function Register() {
     resolver: yupResolver(schema),
   });
 
+  // eslint-disable-next-line no-unused-vars
   const [createUserWithEmailAndPassword, user, loading, error] =
     useCreateUserWithEmailAndPassword(auth);
 
@@ -56,8 +57,7 @@ export function Register() {
     }
     reset();
   };
-
-git   return (
+  return (
     <div className="w-full h-screen flex justify-center items-center">
       <Card className="w-96">
         <CardHeader
