@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { yupResolver } from "@hookform/resolvers/yup";
 import {
   Button,
@@ -7,7 +8,10 @@ import {
   CardHeader,
   Typography,
 } from "@material-tailwind/react";
-import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
+import {
+  useCreateUserWithEmailAndPassword,
+  useUpdateProfile,
+} from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 
@@ -43,13 +47,14 @@ export function Register() {
   // eslint-disable-next-line no-unused-vars
   const [createUserWithEmailAndPassword, user, loading, error] =
     useCreateUserWithEmailAndPassword(auth);
+  const [updateProfile, updating] = useUpdateProfile(auth);
 
   const handleRegisterForm = async (data) => {
     const result = await createUserWithEmailAndPassword(
       data.email,
       data.password
     );
-
+    updateProfile({ displayName: data.name });
     if (result?.user?.email) {
       toast.success("Successfully Register!");
     } else {
@@ -57,6 +62,7 @@ export function Register() {
     }
     reset();
   };
+
   return (
     <div className="w-full h-screen flex justify-center items-center">
       <Card className="w-96">
