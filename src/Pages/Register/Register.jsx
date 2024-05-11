@@ -40,22 +40,11 @@ export function Register() {
     resolver: yupResolver(schema),
   });
 
-  const [createUserWithEmailAndPassword, user, loading, error] =
-    useCreateUserWithEmailAndPassword(auth);
-
-  const handleRegisterForm = async (data) => {
-    const result = await createUserWithEmailAndPassword(
-      data.email,
-      data.password
-    );
-
-    if (result?.user?.email) {
-      toast.success("Successfully Register!");
-    } else {
-      toast.error(error.code);
-    }
-    reset();
+  const handleRegisterForm = (data) => {
+    console.log({ data });
   };
+
+  console.log({ errors });
 
   return (
     <div className="w-full h-screen flex justify-center items-center">
