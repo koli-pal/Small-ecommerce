@@ -1,16 +1,20 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import {
+  Button,
   Card,
-  CardHeader,
   CardBody,
   CardFooter,
+  CardHeader,
   Typography,
-  Button,
 } from "@material-tailwind/react";
+import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
+
+import toast from "react-hot-toast";
 import * as yup from "yup";
 import TextInputField from "../../Componants/Shared/TextInputField";
-import { Link } from "react-router-dom";
+import auth from "../../Componants/firebase.init";
 
 const schema = yup
   .object({
@@ -36,13 +40,23 @@ export function Register() {
     resolver: yupResolver(schema),
   });
 
-  const handleRegisterForm = (data) => {
-    console.log({ data });
+  // eslint-disable-next-line no-unused-vars
+  const [createUserWithEmailAndPassword, user, loading, error] =
+    useCreateUserWithEmailAndPassword(auth);
+
+  const handleRegisterForm = async (data) => {
+    const result = await createUserWithEmailAndPassword(
+      data.email,
+      data.password
+    );
+
+    if (result?.user?.email) {
+      toast.success("Successfully Register!");
+    } else {
+      toast.error(error.code);
+    }
     reset();
   };
-
-  console.log({ errors });
-
   return (
     <div className="w-full h-screen flex justify-center items-center">
       <Card className="w-96">
