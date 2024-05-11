@@ -11,6 +11,8 @@ import { useForm } from "react-hook-form";
 import TextInputField from "../../Componants/Shared/TextInputField";
 import * as yup from "yup";
 import { Link } from "react-router-dom";
+import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
+import auth from "../../Componants/firebase.init";
 
 const schema = yup
   .object({
@@ -28,13 +30,14 @@ export function LoginCard() {
   } = useForm({
     resolver: yupResolver(schema),
   });
+  const [signInWithEmailAndPassword, user, loading, error] =
+    useSignInWithEmailAndPassword(auth);
 
   const handleLoginForm = (data) => {
-    console.log({ data });
+    signInWithEmailAndPassword(data.email, data.password);
+
     reset();
   };
-
-  console.log({ errors });
 
   return (
     <div className="w-full h-screen flex justify-center items-center">
@@ -66,6 +69,7 @@ export function LoginCard() {
               errors={errors}
               register={register}
             />
+            {error && <small className="text-red-500">{error.code}</small>}
           </CardBody>
           <CardFooter className="pt-0">
             <Button variant="gradient" type="submit" fullWidth>
