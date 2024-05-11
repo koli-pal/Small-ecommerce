@@ -57,9 +57,7 @@ export function Register() {
     reset();
   };
 
-  console.log({ errors, user, error });
-
-  return (
+git   return (
     <div className="w-full h-screen flex justify-center items-center">
       <Card className="w-96">
         <CardHeader
