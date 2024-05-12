@@ -22,98 +22,96 @@ import { LoginCard } from "../../Pages/Login/Login";
 import RequireAuth from "../RequiredAuth/RequireAuth";
 
 const router = createBrowserRouter([
-    {
-      path: "/",
-      element: <Main/>,
-      children: [
-        {
-            path: '/',
-            element: <Home/>
-        },
-        {
-            path: 'products',
-            element: <Products/>
-        },
-        {
-            path: 'products/:id',
-            element: <SingleProduct/>
-        },
-        {
-            path: 'cart',
-            element: <Cart/>
-        },
-        {
-            path:'checkout',
-            element: <Checkout/>
-        }
-      ]
-    },
-    {
-        path: '/dashboard',
-        index: <Dashboard/>,
-        children :[
-            {
-                path: 'profile',
-                element: 
-                <RequireAuth>
-                 <Profile/>
-                </RequireAuth>
-            },
-            {
-                path: 'orders',
-                element: (
-                <RequireAuth>
-                    <Order/>
-                </RequireAuth>
-                ),
-            }
-        ]
-    },
-    {
-        path: '/dashboard/admin',
-        element: <MyAdmin/>,
-        children:
-        [
-            {
-                path: '/dashboard/admin',
-                element: <AdminDashboard/>
-            },
-            {
-                path: 'inventory',
-                element: <Inventory/>
-            },
-            {
-                path: 'product-upload',
-                element: <ProductIUpload/>
-            },
-            {
-                path: 'all-orders',
-                element: <AllOrder/>
-            },
-            {
-                path: 'all-users',
-                element: <AllUsers/>
-            },
-            {
-                path: 'profile',
-                element: <MyProfile/>
-            }
-        ]
-    },
-    {
-        path:'/login',
-        element:<LoginCard/>
-    },
-    {
-      path: "/register",
-      element: <Register />,
-    },
-    {
-        path: '*',
-        element: <div>404 Not Found</div>
-    }
-
-  ]);
-
+  {
+    path: "/",
+    element: <Main />,
+    children: [
+      {
+        path: "/",
+        element: <Home />,
+      },
+      {
+        path: "products",
+        element: <Products />,
+      },
+      {
+        path: "products/:id",
+        element: <SingleProduct />,
+      },
+      {
+        path: "cart",
+        element: <Cart />,
+      },
+      {
+        path: "checkout",
+        element: <Checkout />,
+      },
+    ],
+  },
+  {
+    path: "/dashboard",
+    element: <Dashboard />,
+    children: [
+      {
+        path: "profile",
+        element: (
+          <RequireAuth>
+            <Profile />
+          </RequireAuth>
+        ),
+      },
+      {
+        path: "orders",
+        element: (
+          <RequireAuth>
+            <Order />
+          </RequireAuth>
+        ),
+      },
+    ],
+  },
+  {
+    path: "/dashboard/admin",
+    element: <MyAdmin />,
+    children: [
+      {
+        path: "/dashboard/admin",
+        element: <AdminDashboard />,
+      },
+      {
+        path: "inventory",
+        element: <Inventory />,
+      },
+      {
+        path: "product-upload",
+        element: <ProductIUpload />,
+      },
+      {
+        path: "all-orders",
+        element: <AllOrder />,
+      },
+      {
+        path: "all-users",
+        element: <AllUsers />,
+      },
+      {
+        path: "profile",
+        element: <MyProfile />,
+      },
+    ],
+  },
+  {
+    path: "/login",
+    element: <LoginCard />,
+  },
+  {
+    path: "/register",
+    element: <Register />,
+  },
+  {
+    path: "*",
+    element: <div>404 Not Found</div>,
+  },
+]);
 
 export default router;
