@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { yupResolver } from "@hookform/resolvers/yup";
 import {
   Card,
@@ -10,9 +11,10 @@ import {
 import { useForm } from "react-hook-form";
 import TextInputField from "../../Componants/Shared/TextInputField";
 import * as yup from "yup";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import auth from "../../Componants/firebase.init";
+import useToken from "../../Componants/Hooks/useToken";
 
 const schema = yup
   .object({
@@ -30,6 +32,12 @@ export function LoginCard() {
   } = useForm({
     resolver: yupResolver(schema),
   });
+
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  let from = location.state?.from?.pathname || "/dashboard/orders"
+
   const [signInWithEmailAndPassword, user, loading, error] =
     useSignInWithEmailAndPassword(auth);
 
@@ -38,6 +46,12 @@ export function LoginCard() {
 
     reset();
   };
+
+  const [token] = useToken(user)
+
+  if (token) {
+    navigate(from, { replace: true });
+  }
 
   return (
     <div className="w-full h-screen flex justify-center items-center">

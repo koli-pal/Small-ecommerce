@@ -5,11 +5,20 @@ import {
   Typography,
   Button,
   IconButton,
+  Menu,
+  MenuHandler,
+  MenuList,
+  MenuItem,
 } from "@material-tailwind/react";
 import { Link } from "react-router-dom";
+import { FaUser } from "react-icons/fa";
+import { useAuthState } from 'react-firebase-hooks/auth';
+import auth from "../../firebase.init";
+import { signOut } from "firebase/auth";
 
 export function NavMenu() {
   const [openNav, setOpenNav] = React.useState(false);
+  const[user]=useAuthState(auth);
 
   React.useEffect(() => {
     window.addEventListener(
@@ -20,6 +29,8 @@ export function NavMenu() {
 
   const navList = (
     <ul className="mt-2 mb-4 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
+      
+      
       <Typography
         as="li"
         variant="small"
@@ -28,22 +39,43 @@ export function NavMenu() {
       >
         <Link to="/products">Products</Link>
       </Typography>
+
+
+
       <Typography
         as="li"
         variant="small"
         color="blue-gray"
         className="flex items-center gap-x-2 p-1 font-medium"
       >
-        <Link to="/login">
-          <Button
-            variant="gradient"
-            size="sm"
-            className="hidden lg:inline-block"
-          >
-            <span>Login</span>
-          </Button>
-        </Link>
+        {
+          user && user.email ? (
+            <Menu>
+              <MenuHandler>
+              <IconButton>
+                 <FaUser className="text-xl text-white"/>
+              </IconButton>
+          </MenuHandler>
+                <MenuList>
+                <Link to="/dashboard/orders"> <MenuItem>Dashboard</MenuItem></Link>
+                <MenuItem onClick={()=>signOut(auth)}>Logout</MenuItem>
+            </MenuList>
+          </Menu>
+          ) : (
+            <Link to="/login">
+              <Button
+                variant="gradient"
+                size="sm"
+                className="hidden lg:inline-block"
+              >
+                <span>Login</span>
+              </Button>
+           </Link>
+
+          )}
       </Typography>
+
+
     </ul>
   );
 
