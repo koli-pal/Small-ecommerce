@@ -1,7 +1,132 @@
 
+import { Controller, useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+import TextInputField from "../../../Componants/Shared/TextInputField";
+import { Button, Textarea } from '@material-tailwind/react';
+import toast from 'react-hot-toast';
 
-export default function ProductIUpload() {
+const schema = yup.object().shape({
+  title: yup.string().required('Product Title is required'),
+  description: yup.string().required('Product Description is required'),
+  price: yup.number().required('Product Price is required').min(0, 'Price must be at least 0'),
+  quantity: yup.number().required('Quantity is required').min(0, 'Quantity must be at least 0'),
+  select: yup.string().required('Please select a category'),
+  image: yup.string().url('Invalid URL').required('Product Image is required'),
+});
+
+export default function ProductUpload() {
+  const {
+    register,
+    handleSubmit,
+    control,
+    reset,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
+
+  const onSubmit = async (data) => {
+    console.log(data);
+    try {
+      const response = await fetch('https://swiftshop-server.vercel.app/product', {
+        method: 'POST',
+        
+        headers: {
+          'Content-Type': 'application/json',
+          authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+        },
+        body: JSON.stringify(data),
+      });
+      console.log(response);
+      if (response.ok) {
+        toast.success('Product added successfully!');
+        reset();
+      } else {
+        toast.error('Failed to add product. Please try again.');
+        reset();
+      }
+    } catch (error) {
+      toast.error('An error occurred. Please try again.');
+    }
+  };
+
   return (
-    <div>ProductIUpload</div>
-  )
+    <div className="bg-white rounded-lg w-6/12">
+      <form className="p-4 space-y-6" onSubmit={handleSubmit(onSubmit)}>
+        <div>
+          <TextInputField
+            register={register}
+            errors={errors}
+            name="title"
+            label="Product Title"
+            type="text"
+            size="lg"
+          />
+        </div>
+        <div>
+          <Textarea
+            label="Product Description"
+            {...register('description')}
+          />
+          {errors.description && <p className="text-red-500">{errors.description.message}</p>}
+        </div>
+        <div className="flex gap-6">
+          <div className="w-full">
+            <TextInputField
+              register={register}
+              errors={errors}
+              name="price"
+              label="Product Price"
+              type="number"
+              size="lg"
+              min="0"
+            />
+          </div>
+          <div className="w-full">
+            <TextInputField
+              register={register}
+              errors={errors}
+              name="quantity"
+              label="Quantity"
+              type="number"
+              size="lg"
+              min="0"
+            />
+          </div>
+        </div>
+        <div>
+          <Controller
+            name="select"
+            control={control}
+            render={({ field }) => (
+              <select
+                className="w-full border border-blue-gray-200 text-blue-gray-500 rounded-md p-2"
+                {...field}
+              >
+                <option value="">Select Category</option>
+                <option value="Grocery & Grains">Grocery & Grains</option>
+                <option value="Grocery & Gift">Grocery & Gift</option>
+                <option value="Tea-Lover">Tea-Lover</option>
+              </select>
+            )}
+          />
+          {errors.select && <p className="text-red-500">{errors.select.message}</p>}
+        </div>
+        <div>
+          <TextInputField
+            register={register}
+            errors={errors}
+            name="image"
+            label="Product Image"
+            type="url"
+            size="lg"
+          />
+        </div>
+        <div>
+          <Button type="submit">Add Product</Button>
+        </div>
+      </form>
+    </div>
+  );
 }
