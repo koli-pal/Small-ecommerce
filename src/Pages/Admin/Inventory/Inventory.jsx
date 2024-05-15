@@ -1,6 +1,7 @@
 
 import { Button, Card, IconButton, Typography } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { HiMiniPencilSquare } from "react-icons/hi2";
 import { RiDeleteBin5Line } from "react-icons/ri";
 import { Link } from "react-router-dom";
@@ -14,6 +15,30 @@ export default function Inventory() {
       .then((res)=> res.json())
       .then((data)=> setProducts(data));
    },[]);
+
+   const handleDelete = (id) => {
+    const alert = window.confirm("Are you sure?")
+    if(alert){
+      fetch(`https://swiftshop-server.vercel.app/product/${id}`, {
+        method: "DELETE",
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("accessToken")}`
+        }
+      })
+      .then((res) => res.json())
+      .then((data) => {
+        if(data.acknowledged){
+          const newProduct = products.filter((item) => item._id !== id)
+          setProducts(newProduct)
+        }
+        toast.success("Successfully deleted!")
+     })
+     .catch((err) => toast.error("Something went wrong!"))
+    
+    }
+    
+  }
+  
 
   return (
     <div>
@@ -69,7 +94,7 @@ export default function Inventory() {
                     <HiMiniPencilSquare className="text-xl text-white"/>
 
                   </IconButton>
-                  <IconButton>
+                  <IconButton onClick = {()=>handleDelete(product._id)}>
                     <RiDeleteBin5Line className="text-xl text-white"/>
 
                   </IconButton>
