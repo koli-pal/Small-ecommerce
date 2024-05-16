@@ -1,6 +1,7 @@
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../firebase.init';
 import { CiUser } from "react-icons/ci";
+import { Link } from 'react-router-dom';
 
 export default function CustomerNavbar() {
     const [user] = useAuthState(auth);
@@ -8,7 +9,7 @@ export default function CustomerNavbar() {
     <div className='border-b'>
         <div className='flex justify-between px-10 py-6'>
             <div>
-                <p>Small E-Commerce</p>
+                <Link to ="/"><p>Small E-Commerce</p></Link>
             </div>
             <div className='flex gap-4 items-center'>
               <div>
