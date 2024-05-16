@@ -27,6 +27,7 @@ export default function useAdminCheck(user) {
         })
         .then((data) => {
           setAdmin(data.admin);
+          console.log({ data });
           setAdminLoading(false);
         });
     }
