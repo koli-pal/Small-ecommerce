@@ -12,7 +12,7 @@ export default function useToken(value) {
       email: value?.user?.email,
   };
   if(value?.user?.email){
-    fetch('https://swiftshop-server.vercel.app/user/${value?user?.email}',{
+    fetch(`https://swiftshop-server.vercel.app/user/${value?.user?.email}`,{
         method: "PUT",
         headers:{
           'content-type': 'application/json',
