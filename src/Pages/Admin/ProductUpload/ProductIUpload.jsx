@@ -96,23 +96,24 @@ export default function ProductUpload() {
           </div>
         </div>
         <div>
-          <Controller
-            name="select"
-            control={control}
-            render={({ field }) => (
+            <div className="w-full">
               <select
-                className="w-full border border-blue-gray-200 text-blue-gray-500 rounded-md p-2"
-                {...field}
+                {...register("category")}
+                className="px-3 py-2 rounded-md border border-gray-400 w-full"
               >
-                <option value="">Select Category</option>
                 <option value="Grocery & Grains">Grocery & Grains</option>
-                <option value="Grocery & Gift">Grocery & Gift</option>
-                <option value="Tea-Lover">Tea-Lover</option>
+                <option value="Grocery As Gift">Grocery As Gift</option>
+                <option value="Honey, Nuts & Seeds">Honey, Nuts & Seeds</option>
+                <option value="Oil & Extracts">Oil & Extracts</option>
+                <option value="Tea Lovers">Tea Lovers</option>
               </select>
-            )}
-          />
-          {errors.select && <p className="text-red-500">{errors.select.message}</p>}
-        </div>
+              {errors.category && (
+                <small className="text-red-500">
+                  {errors.category?.message}
+                </small>
+              )}
+            </div>
+          </div>
         <div>
           <TextInputField
             register={register}
