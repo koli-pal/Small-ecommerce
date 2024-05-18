@@ -11,7 +11,7 @@ export default function Home() {
       <Blob />
       <div className="py-20">
         <h2 className="text-3xl font-bold text-center mb-">Our Products</h2>
-        <AllProducts />
+        <AllProducts page="home"/>
         <div className="flex justify-center  mt-6">
           <Link className="font-semibold text-lg underline" to="/products">
             View all products
