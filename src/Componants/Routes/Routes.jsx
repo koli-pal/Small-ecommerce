@@ -20,6 +20,7 @@ import { Register } from "../../Pages/Register/Register";
 
 import { LoginCard } from "../../Pages/Login/Login";
 import RequireAuth from "../RequiredAuth/RequireAuth";
+import Category from "../../Category/Category";
 
 const router = createBrowserRouter([
   {
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
       {
         path: "products/:id",
         element: <SingleProduct />,
+      },
+      {
+        path:"category/:category",
+        element:<Category/>,
       },
       {
         path: "cart",
