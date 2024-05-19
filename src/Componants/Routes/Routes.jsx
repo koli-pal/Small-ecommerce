@@ -11,7 +11,7 @@ import Order from "../../Pages/Customer/Order/Order";
 import AdminDashboard from "../../Pages/Admin/AdminDashboard/AdminDashboard";
 import Inventory from "../../Pages/Admin/Inventory/Inventory";
 import ProductIUpload from "../../Pages/Admin/ProductUpload/ProductIUpload";
-import AllOrder from "../../Pages/Admin/AllOrders/AllOrder";
+import AllOrder from "../../Pages/Admin/AllOrders/AllOrders";
 import AllUsers from "../../Pages/Admin/AllUsers/AllUsers";
 import MyProfile from "../../Pages/Admin/MyProfile/MyProfile";
 import MyAdmin from "../../Pages/Admin/MyAdmin/MyAdmin";
@@ -20,8 +20,11 @@ import { Register } from "../../Pages/Register/Register";
 
 import { LoginCard } from "../../Pages/Login/Login";
 import RequireAuth from "../RequiredAuth/RequireAuth";
+
+import Category from "../../Category/Category";
 import RequiredAdmin from "../RequiredAdmin/RequiredAdmin";
 //import ProductUpload from "../../Pages/Admin/ProductUpload/ProductIUpload";
+
 
 const router = createBrowserRouter([
   {
@@ -39,10 +42,14 @@ const router = createBrowserRouter([
       {
         path: "products/:id",
         element: (
-        <RequireAuth>
-          <SingleProduct />
-        </RequireAuth>
+          <RequireAuth>
+            <SingleProduct />
+          </RequireAuth>
         ),
+      },
+      {
+        path:"category/:category",
+        element:<Category/>,
       },
       {
         path: "cart",

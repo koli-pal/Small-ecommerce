@@ -35,9 +35,44 @@ export function NavMenu() {
         as="li"
         variant="small"
         color="blue-gray"
-        className="flex items-center gap-x-2 p-1 font-medium"
+        className="flex items-center gap-x-2 p-1 font-medium  cursor-pointer"
       >
         <Link to="/products">Products</Link>
+      </Typography>
+      <Typography
+        as="li"
+        variant="small"
+        color="blue-gray"
+        className="flex items-center gap-x-2 p-1 font-medium cursor-pointer"
+      >
+        <Menu>
+      <MenuHandler>
+        <p>Category</p>
+      </MenuHandler>
+      <MenuList>
+        <Link to="/category/grocery-and-grains">
+        <MenuItem>Grocery & Grains </MenuItem>
+        </Link>
+        
+        <Link to="/category/grocery-as-gifts">
+        <MenuItem> Grocery as Gifts</MenuItem>
+        </Link>
+        <Link to="/category/honey-nuts-and-seeds">
+        <MenuItem>Honey,Nuts & Seeds</MenuItem>
+        </Link>
+        <Link to="/category/oil-and-extracts">
+        <MenuItem>Oil & Extracts</MenuItem>
+        </Link>
+        <Link to="/category/tea-lovers">
+        <MenuItem>Tea Lovers</MenuItem>
+        </Link>
+        
+        
+        
+        
+        
+      </MenuList>
+    </Menu>
       </Typography>
 
 
