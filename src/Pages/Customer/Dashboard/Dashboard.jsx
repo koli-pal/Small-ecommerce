@@ -14,7 +14,7 @@ export default function Dashboard() {
       <CustomerNavbar/>
     <div className="flex" >
       <CustomerSidebar/>
-      <div className="bg-gray-100 min-h-[90vh] w-full p-10 ">
+      <div className="bg-gray-100 h-[90vh] w-full p-10 overflow-y-scroll ">
         <Outlet />
       </div>
     </div>
