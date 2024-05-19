@@ -77,7 +77,7 @@ export default function AllOrders() {
             "Content-Type": "application/json",
             authorization: `Bearer ${localStorage.getItem("accessToken")}`,
           },
-          data: JSON.stringify({ status: selectValue }),
+          body: JSON.stringify({ status: selectValue }),
         }
       )
         .then((res) => res.json())
@@ -168,7 +168,7 @@ export default function AllOrders() {
                     color="b;ue-gray"
                     className="font=medium"
                   >
-                    {item.productQuantity}
+                    {item.quantity}
                   </Typography>
                 </td>
                 <td className="p-2">
