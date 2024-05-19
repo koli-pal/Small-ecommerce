@@ -35,7 +35,7 @@ export function NavMenu() {
         as="li"
         variant="small"
         color="blue-gray"
-        className="flex items-center gap-x-2 p-1 font-medium"
+        className="flex items-center gap-x-2 p-1 font-medium  cursor-pointer"
       >
         <Link to="/products">Products</Link>
       </Typography>
@@ -43,7 +43,7 @@ export function NavMenu() {
         as="li"
         variant="small"
         color="blue-gray"
-        className="flex items-center gap-x-2 p-1 font-medium"
+        className="flex items-center gap-x-2 p-1 font-medium cursor-pointer"
       >
         <Menu>
       <MenuHandler>
