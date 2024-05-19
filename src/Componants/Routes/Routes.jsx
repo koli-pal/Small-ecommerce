@@ -20,8 +20,11 @@ import { Register } from "../../Pages/Register/Register";
 
 import { LoginCard } from "../../Pages/Login/Login";
 import RequireAuth from "../RequiredAuth/RequireAuth";
+
+import Category from "../../Category/Category";
 import RequiredAdmin from "../RequiredAdmin/RequiredAdmin";
 //import ProductUpload from "../../Pages/Admin/ProductUpload/ProductIUpload";
+
 
 const router = createBrowserRouter([
   {
@@ -43,6 +46,10 @@ const router = createBrowserRouter([
           <SingleProduct />
         </RequireAuth>
         ),
+      },
+      {
+        path:"category/:category",
+        element:<Category/>,
       },
       {
         path: "cart",
