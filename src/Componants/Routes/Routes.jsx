@@ -11,7 +11,7 @@ import Order from "../../Pages/Customer/Order/Order";
 import AdminDashboard from "../../Pages/Admin/AdminDashboard/AdminDashboard";
 import Inventory from "../../Pages/Admin/Inventory/Inventory";
 import ProductIUpload from "../../Pages/Admin/ProductUpload/ProductIUpload";
-import AllOrder from "../../Pages/Admin/AllOrders/AllOrder";
+import AllOrder from "../../Pages/Admin/AllOrders/AllOrders";
 import AllUsers from "../../Pages/Admin/AllUsers/AllUsers";
 import MyProfile from "../../Pages/Admin/MyProfile/MyProfile";
 import MyAdmin from "../../Pages/Admin/MyAdmin/MyAdmin";
@@ -39,9 +39,9 @@ const router = createBrowserRouter([
       {
         path: "products/:id",
         element: (
-        <RequireAuth>
-          <SingleProduct />
-        </RequireAuth>
+          <RequireAuth>
+            <SingleProduct />
+          </RequireAuth>
         ),
       },
       {
